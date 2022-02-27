@@ -63,6 +63,7 @@
   <servers>
     <server config-ref="server-config" name="server">
       <application-ref ref="__admingui" virtual-servers="__asadmin"></application-ref>
+      <application-ref ref="Web_JSP" virtual-servers="server"></application-ref>
       <application-ref ref="HLC_P05" virtual-servers="server"></application-ref>
       <resource-ref ref="jdbc/__TimerPool"></resource-ref>
       <resource-ref ref="jdbc/__default"></resource-ref>
@@ -121,6 +122,7 @@
       <ejb-container>
         <ejb-timer-service></ejb-timer-service>
       </ejb-container>
+      <rest-config></rest-config>
       <diagnostic-service></diagnostic-service>
       <security-service>
         <auth-realm classname="com.sun.enterprise.security.auth.realm.file.FileRealm" name="admin-realm">
@@ -464,10 +466,20 @@
   </secure-admin>
   <clusters></clusters>
   <applications>
-    <application context-root="/HLC_P05" object-type="user" name="HLC_P05" directory-deployed="true" location="file:/C:/Users/migva/Google%20Drive/08%20DAM/2%20Curso/06%20HLC/Practica%2005/HLC_P05/HLC_P05/build/web/">
-      <property name="appLocation" value="file:/C:/Users/migva/Google%20Drive/08%20DAM/2%20Curso/06%20HLC/Practica%2005/HLC_P05/HLC_P05/build/web/"></property>
+    <application context-root="/Web_JSP" object-type="user" name="Web_JSP" directory-deployed="true" location="file:/C:/Users/migva/Google%20Drive/08%20DAM/2%20Curso/06%20HLC/Practica%2005/p05_JSP/Wep_jsp2/Wep_JSP/build/web/">
+      <property name="appLocation" value="file:/C:/Users/migva/Google%20Drive/08%20DAM/2%20Curso/06%20HLC/Practica%2005/p05_JSP/Wep_jsp2/Wep_JSP/build/web/"></property>
       <property name="archiveType" value="war"></property>
       <property name="defaultAppName" value="web"></property>
+      <module name="Web_JSP">
+        <engine sniffer="security"></engine>
+        <engine sniffer="web"></engine>
+      </module>
+    </application>
+    <application context-root="/HLC_P05" object-type="user" name="HLC_P05" directory-deployed="true" location="file:/C:/Users/migva/Google%20Drive/08%20DAM/2%20Curso/06%20HLC/Practica%2005/HLC_P05/HLC_P05/build/web/">
+      <property name="archiveType" value="war"></property>
+      <property name="appLocation" value="file:/C:/Users/migva/Google%20Drive/08%20DAM/2%20Curso/06%20HLC/Practica%2005/HLC_P05/HLC_P05/build/web/"></property>
+      <property name="defaultAppName" value="web"></property>
+      <property name="keepSessions" value="true"></property>
       <module name="HLC_P05">
         <engine sniffer="security"></engine>
         <engine sniffer="web"></engine>
