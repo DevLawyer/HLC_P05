@@ -5,6 +5,7 @@ import javax.servlet.http.*;
 import javax.servlet.jsp.*;
 import beans.*;
 import java.util.*;
+import java.text.SimpleDateFormat;
 
 public final class list1_jsp extends org.apache.jasper.runtime.HttpJspBase
     implements org.apache.jasper.runtime.JspSourceDependent {
@@ -36,8 +37,24 @@ public final class list1_jsp extends org.apache.jasper.runtime.HttpJspBase
                     this.contribution = contribution;
                 }
 
-                public GregorianCalendar getEntryDate() {
-                    return entryDate;
+                private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                public String parseDate(GregorianCalendar cal) {
+                    /**
+                     * Creates a Date object with the same values as the GregorianCalendar parameter.
+                     * Then, it converts it to a formatted string with SimpleDateFormat and the format() method.
+                     */
+                    try {
+                        Date thisDate = cal.getTime();
+                        return sdf.format(thisDate);
+                    } catch (Exception e) {
+                        // If the date cannot be formatted:
+                        System.out.println(e.getMessage());
+                        return null;
+                    }
+                }
+
+                public String getEntryDate() {
+                    return parseDate(entryDate);
                 }
 
                 public void setEntryDate(GregorianCalendar entryDate) {
@@ -98,11 +115,12 @@ HashMap<Integer, Member> members = new HashMap<Integer, Member>();
       out.write("\n");
       out.write("\n");
       out.write("\n");
+      out.write("\n");
       out.write("<!DOCTYPE html>\n");
       out.write("<html>\n");
       out.write("    <head>\n");
       out.write("        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\n");
-      out.write("        <title>ESA Fans</title>\n");
+      out.write("        <title>ESA Listar1</title>\n");
       out.write("        <link rel=\"icon\" type=\"image/x-icon\" href=\"00_resources/images/esa_logo.ico\">\n");
       out.write("        <link href=\"https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css\" rel=\"stylesheet\" integrity=\"sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC\" crossorigin=\"anonymous\">\n");
       out.write("        <link href=\"https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css\" rel=\"stylesheet\">\n");
@@ -151,11 +169,11 @@ HashMap<Integer, Member> members = new HashMap<Integer, Member>();
       out.write("        ");
 
             members.put(1, new Member("España", "spain.png", 169, new GregorianCalendar(1975,3,28)));
-            members.put(2, new Member("Alemania", "germany.png", 169, new GregorianCalendar(1975,3,28)));
-            members.put(3, new Member("Francia", "france.png", 169, new GregorianCalendar(1975,3,28)));
-            members.put(4, new Member("Noruega", "norway.png", 169, new GregorianCalendar(1975,3,28)));
-            members.put(5, new Member("Italia", "italy.png", 169, new GregorianCalendar(1975,3,28)));
-            members.put(6, new Member("Irlanda", "ireland.png", 169, new GregorianCalendar(1975,3,28)));
+            members.put(2, new Member("Alemania", "germany.png", 614, new GregorianCalendar(1975,3,28)));
+            members.put(3, new Member("Francia", "france.png", 778, new GregorianCalendar(1975,3,28)));
+            members.put(4, new Member("Noruega", "norway.png", 33, new GregorianCalendar(1975,3,28)));
+            members.put(5, new Member("Italia", "italy.png", 397, new GregorianCalendar(1975,3,28)));
+            members.put(6, new Member("Irlanda", "ireland.png", 12, new GregorianCalendar(1975,3,28)));
         
       out.write("\n");
       out.write("        <div class=\"row d-flex justify-content-center\">\n");
@@ -163,6 +181,7 @@ HashMap<Integer, Member> members = new HashMap<Integer, Member>();
       out.write("            ");
 
                 for(java.util.Map.Entry<Integer, Member> mem : members.entrySet()) {
+                    int index = mem.getKey();
                     Member country = mem.getValue();
             
       out.write("\n");
@@ -174,7 +193,12 @@ HashMap<Integer, Member> members = new HashMap<Integer, Member>();
       out.write("                    <h5 class=\"card-title\">");
       out.print(country.getName());
       out.write("</h5>\n");
-      out.write("                    <input type=\"submit\" class=\"btn btn-primary\" value=\"Saber Más\"/>\n");
+      out.write("                    <form action=\"details.jsp\">\n");
+      out.write("                        <input type=\"hidden\" value=\"");
+      out.print(index);
+      out.write("\" name=\"country\"/>\n");
+      out.write("                        <input type=\"submit\" class=\"btn btn-primary\" value=\"Saber Más\"/>\n");
+      out.write("                    </form>\n");
       out.write("                </div>\n");
       out.write("            </article>\n");
       out.write("            ");

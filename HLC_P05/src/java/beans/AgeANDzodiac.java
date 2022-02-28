@@ -19,7 +19,7 @@ public class AgeANDzodiac {
         String zodiac = "";
         int month = bornDate.get(Calendar.MONTH);
         int day = bornDate.get(Calendar.DAY_OF_MONTH);
-        
+
         switch(month){
             case 1:
                 if(day >= 21){
