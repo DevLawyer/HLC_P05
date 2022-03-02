@@ -466,10 +466,11 @@
   </secure-admin>
   <clusters></clusters>
   <applications>
-    <application context-root="/Web_JSP" object-type="user" name="Web_JSP" directory-deployed="true" location="file:/C:/Users/migva/Google%20Drive/08%20DAM/2%20Curso/06%20HLC/Practica%2005/p05_JSP/Wep_jsp2/Wep_JSP/build/web/">
-      <property name="appLocation" value="file:/C:/Users/migva/Google%20Drive/08%20DAM/2%20Curso/06%20HLC/Practica%2005/p05_JSP/Wep_jsp2/Wep_JSP/build/web/"></property>
+    <application context-root="/Web_JSP" object-type="user" name="Web_JSP" directory-deployed="true" location="file:/C:/Users/migva/Google%20Drive/08%20DAM/2%20Curso/06%20HLC/Practica%2005/p05_JSP/Wep_JSP/build/web/">
       <property name="archiveType" value="war"></property>
+      <property name="appLocation" value="file:/C:/Users/migva/Google%20Drive/08%20DAM/2%20Curso/06%20HLC/Practica%2005/p05_JSP/Wep_JSP/build/web/"></property>
       <property name="defaultAppName" value="web"></property>
+      <property name="keepSessions" value="true"></property>
       <module name="Web_JSP">
         <engine sniffer="security"></engine>
         <engine sniffer="web"></engine>

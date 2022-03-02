@@ -49,85 +49,14 @@
         </header>
         
         <main class="container-fluid bg-main p-5">
-        <%! 
-            public class Member {
-
-                public String getName() {
-                    return name;
-                }
-
-                public void setName(String name) {
-                    this.name = name;
-                }
-
-                public String getFlagImage() {
-                    return flagImage;
-                }
-
-                public void setFlagImage(String flagImage) {
-                    this.flagImage = flagImage;
-                }
-
-                public int getContribution() {
-                    return contribution;
-                }
-
-                public void setContribution(int contribution) {
-                    this.contribution = contribution;
-                }
-
-                private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-                public String parseDate(GregorianCalendar cal) {
-                    /**
-                     * Creates a Date object with the same values as the GregorianCalendar parameter.
-                     * Then, it converts it to a formatted string with SimpleDateFormat and the format() method.
-                     */
-                    try {
-                        Date thisDate = cal.getTime();
-                        return sdf.format(thisDate);
-                    } catch (Exception e) {
-                        // If the date cannot be formatted:
-                        System.out.println(e.getMessage());
-                        return null;
-                    }
-                }
-
-                public String getEntryDate() {
-                    return parseDate(entryDate);
-                }
-
-                public void setEntryDate(GregorianCalendar entryDate) {
-                    this.entryDate = entryDate;
-                }
-
-                public Member(String name, String flagImage, int contribution, GregorianCalendar entryDate){
-                    this.name = name;
-                    this.flagImage = flagImage;
-                    this.contribution = contribution;
-                    this.entryDate = entryDate;
-                }
-
-                private String name = "";
-                private String flagImage = "";
-                private int contribution = 0;
-                private GregorianCalendar entryDate;
-
-            }
-        %>
-        <%!HashMap<Integer, Member> members = new HashMap<Integer, Member>();%>
-        <%
-            members.put(1, new Member("España", "spain.png", 169, new GregorianCalendar(1975,3,28)));
-            members.put(2, new Member("Alemania", "germany.png", 614, new GregorianCalendar(1975,3,28)));
-            members.put(3, new Member("Francia", "france.png", 778, new GregorianCalendar(1975,3,28)));
-            members.put(4, new Member("Noruega", "norway.png", 33, new GregorianCalendar(1975,3,28)));
-            members.put(5, new Member("Italia", "italy.png", 397, new GregorianCalendar(1975,3,28)));
-            members.put(6, new Member("Irlanda", "ireland.png", 12, new GregorianCalendar(1975,3,28)));
-        %>
+        <jsp:useBean id="members" class="beans.MapMembers" />
+        <% HashMap<Integer, Member> map = members.getMembers();%>
+        
         <div class="row d-flex justify-content-center">
             <div class="col-4">
                 <%
                     int index = Integer.valueOf(request.getParameter("country"));
-                    Member country = members.get(index);
+                    Member country = map.get(index);
                 %>
                 <div class="card mb-3" style="max-width: 540px;">
                     <div class="row g-0">

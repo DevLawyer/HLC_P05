@@ -1,6 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.util.*"%>
 <%@page import="java.time.*"%>
+<%@page import="beans.*"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -60,107 +61,12 @@
                             Esta es un website creado por un fan de la Agencia Espacial Europea. </br>
                             <h6>Nombre del Autor: Miguel María</h6>
                             <h6>Apellidos del Autor: Vázquez Martínez</h6>
+                            <jsp:useBean id="autor" class="beans.Author" />
                             <h6>Edad del Autor: 
-                            <%
-                                GregorianCalendar bornDate = new GregorianCalendar(1991,3,28);
-                                int year = bornDate.get(Calendar.YEAR);
-                                int month = bornDate.get(Calendar.MONTH);
-                                int day = bornDate.get(Calendar.DAY_OF_MONTH);
-                                out.println(Period.between(LocalDate.of(year, month, day), LocalDate.now()).getYears());
-                            %>
+                            <% out.println(AgeANDzodiac.calculateAge(autor.getBornDate())); %>
                             </h6>
-                            <h6>Zodiaco del Autor: 
-                            <%
-                                String zodiac = "";
-
-                                switch(month){
-                                    case 1:
-                                        if(day >= 21){
-                                            zodiac = "Acuario";
-                                        } else {
-                                            zodiac = "Capricornio";
-                                        }
-                                        break;
-                                    case 2:
-                                        if(day >= 20){
-                                            zodiac = "Piscis";
-                                        } else {
-                                            zodiac = "Acuario";
-                                        }
-                                        break;
-                                    case 3:
-                                        if(day >= 21){
-                                            zodiac = "Aries";
-                                        } else {
-                                            zodiac = "Piscis";
-                                        }
-                                        break;
-                                    case 4:
-                                        if(day >= 21){
-                                            zodiac = "Tauro";
-                                        } else {
-                                            zodiac = "Aries";
-                                        }
-                                        break;
-                                    case 5:
-                                        if(day >= 21){
-                                            zodiac = "Gemini";
-                                        } else {
-                                            zodiac = "Tauro";
-                                        }
-                                        break;
-                                    case 6:
-                                        if(day >= 22){
-                                            zodiac = "Cáncer";
-                                        } else {
-                                            zodiac = "Gemini";
-                                        }
-                                        break;
-                                    case 7:
-                                        if(day >= 22){
-                                            zodiac = "Leo";
-                                        } else {
-                                            zodiac = "Cáncer";
-                                        }
-                                        break;
-                                    case 8:
-                                        if(day >= 24){
-                                            zodiac = "Virgo";
-                                        } else {
-                                            zodiac = "Leo";
-                                        }
-                                        break;
-                                    case 9:
-                                        if(day >= 24){
-                                            zodiac = "Libra";
-                                        } else {
-                                            zodiac = "Virgo";
-                                        }
-                                        break;
-                                    case 10:
-                                        if(day >= 23){
-                                            zodiac = "Escorpio";
-                                        } else {
-                                            zodiac = "Libra";
-                                        }
-                                        break;
-                                    case 11:
-                                        if(day >= 21){
-                                            zodiac = "Sagitario";
-                                        } else {
-                                            zodiac = "Escorpio";
-                                        }
-                                        break;
-                                    case 12:
-                                        if(day >= 22){
-                                            zodiac = "Capricornio";
-                                        } else {
-                                            zodiac = "Sagitario";
-                                        }
-                                }
-
-                                out.println(zodiac);
-                            %>
+                            <h6>Zodiaco del Autor:  
+                            <% out.println(AgeANDzodiac.getZodiac(autor.getBornDate())); %>
                             </h6>
                         </p>
                     </div>

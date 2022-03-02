@@ -10,72 +10,6 @@ import java.text.SimpleDateFormat;
 public final class details_jsp extends org.apache.jasper.runtime.HttpJspBase
     implements org.apache.jasper.runtime.JspSourceDependent {
 
- 
-            public class Member {
-
-                public String getName() {
-                    return name;
-                }
-
-                public void setName(String name) {
-                    this.name = name;
-                }
-
-                public String getFlagImage() {
-                    return flagImage;
-                }
-
-                public void setFlagImage(String flagImage) {
-                    this.flagImage = flagImage;
-                }
-
-                public int getContribution() {
-                    return contribution;
-                }
-
-                public void setContribution(int contribution) {
-                    this.contribution = contribution;
-                }
-
-                private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-                public String parseDate(GregorianCalendar cal) {
-                    /**
-                     * Creates a Date object with the same values as the GregorianCalendar parameter.
-                     * Then, it converts it to a formatted string with SimpleDateFormat and the format() method.
-                     */
-                    try {
-                        Date thisDate = cal.getTime();
-                        return sdf.format(thisDate);
-                    } catch (Exception e) {
-                        // If the date cannot be formatted:
-                        System.out.println(e.getMessage());
-                        return null;
-                    }
-                }
-
-                public String getEntryDate() {
-                    return parseDate(entryDate);
-                }
-
-                public void setEntryDate(GregorianCalendar entryDate) {
-                    this.entryDate = entryDate;
-                }
-
-                public Member(String name, String flagImage, int contribution, GregorianCalendar entryDate){
-                    this.name = name;
-                    this.flagImage = flagImage;
-                    this.contribution = contribution;
-                    this.entryDate = entryDate;
-                }
-
-                private String name = "";
-                private String flagImage = "";
-                private int contribution = 0;
-                private GregorianCalendar entryDate;
-
-            }
-        
-HashMap<Integer, Member> members = new HashMap<Integer, Member>();
   private static final JspFactory _jspxFactory = JspFactory.getDefaultFactory();
 
   private static java.util.List<String> _jspx_dependants;
@@ -163,25 +97,25 @@ HashMap<Integer, Member> members = new HashMap<Integer, Member>();
       out.write("        \n");
       out.write("        <main class=\"container-fluid bg-main p-5\">\n");
       out.write("        ");
+      beans.MapMembers members = null;
+      synchronized (_jspx_page_context) {
+        members = (beans.MapMembers) _jspx_page_context.getAttribute("members", PageContext.PAGE_SCOPE);
+        if (members == null){
+          members = new beans.MapMembers();
+          _jspx_page_context.setAttribute("members", members, PageContext.PAGE_SCOPE);
+        }
+      }
       out.write("\n");
       out.write("        ");
+ HashMap<Integer, Member> map = members.getMembers();
       out.write("\n");
-      out.write("        ");
-
-            members.put(1, new Member("España", "spain.png", 169, new GregorianCalendar(1975,3,28)));
-            members.put(2, new Member("Alemania", "germany.png", 614, new GregorianCalendar(1975,3,28)));
-            members.put(3, new Member("Francia", "france.png", 778, new GregorianCalendar(1975,3,28)));
-            members.put(4, new Member("Noruega", "norway.png", 33, new GregorianCalendar(1975,3,28)));
-            members.put(5, new Member("Italia", "italy.png", 397, new GregorianCalendar(1975,3,28)));
-            members.put(6, new Member("Irlanda", "ireland.png", 12, new GregorianCalendar(1975,3,28)));
-        
-      out.write("\n");
+      out.write("        \n");
       out.write("        <div class=\"row d-flex justify-content-center\">\n");
       out.write("            <div class=\"col-4\">\n");
       out.write("                ");
 
                     int index = Integer.valueOf(request.getParameter("country"));
-                    Member country = members.get(index);
+                    Member country = map.get(index);
                 
       out.write("\n");
       out.write("                <div class=\"card mb-3\" style=\"max-width: 540px;\">\n");
